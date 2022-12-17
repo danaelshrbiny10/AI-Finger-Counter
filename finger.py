@@ -24,15 +24,15 @@ while True:
                 handList.append((cx, cy))
 
                 for point in handList:
-                cv2.circle(image, point, 10, (255, 255, 0), cv2.FILLED)
-                upCount = 0
-                for coordinate in finger_Coord:
-                    if handList[coordinate[0]][1] < handList[coordinate[1]][1]:
+                    cv2.circle(image, point, 10, (255, 255, 0), cv2.FILLED)
+                    upCount = 0
+                    for coordinate in finger_Coord:
+                        if handList[coordinate[0]][1] < handList[coordinate[1]][1]:
+                            upCount += 1
+                    if handList[thumb_Coord[0]][0] > handList[thumb_Coord[1]][0]:
                         upCount += 1
-                if handList[thumb_Coord[0]][0] > handList[thumb_Coord[1]][0]:
-                    upCount += 1
+                    
+                    cv2.putText(image, str(upCount), (150,150), cv2.FONT_HERSHEY_PLAIN, 12, (0,255,0), 12)
                 
-                cv2.putText(image, str(upCount), (150,150), cv2.FONT_HERSHEY_PLAIN, 12, (0,255,0), 12)
-            
-            cv2.imshow("Counting number of fingers", image)
-            cv2.waitKey(1)    
+                cv2.imshow("Counting number of fingers", image)
+                cv2.waitKey(1)    
